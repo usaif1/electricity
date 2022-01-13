@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, Suspense } from "react";
+import { Canvas, useLoader } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import "./App.css";
+import { DoubleSide, TextureLoader } from "three";
+
+//imports
+import Conductor from "./components/Conductor";
+import metalrod from "./assets/metalrod.jpg";
 
 function App() {
+  const [cylinderDimensions, setCylinderDimensions] = useState([
+    0.1,
+    0.1,
+    2,
+    32,
+    32,
+    true,
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ height: "100vh" }}>
+      <Canvas
+       camera={{ position: [0.5, 0.5, 3] }}
+      >
+        <axesHelper />
+        <ambientLight />
+        <OrbitControls />
+        <Suspense fallback={null}>
+          <group>
+            <Conductor />
+          </group>
+        </Suspense>
+      </Canvas>
     </div>
   );
 }
