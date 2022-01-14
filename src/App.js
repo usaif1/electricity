@@ -20,10 +20,7 @@ function App() {
 
   return (
     <div className="App" style={{ height: "100vh" }}>
-      <Canvas
-       camera={{ position: [0.5, 0.5, 3] }}
-      >
-        <axesHelper />
+      <Canvas camera={{ position: [0.5, 0.5, 3] }}>
         <ambientLight />
         <OrbitControls />
         <Suspense fallback={null}>
