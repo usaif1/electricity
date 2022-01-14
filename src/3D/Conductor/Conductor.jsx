@@ -15,10 +15,10 @@ const Conductor = () => {
         <Wire />
         {count.map((number) => {
           return (
-            <>
+            <React.Fragment key={number}>
               <Electron number={number} />
               <Current number={number} />
-            </>
+            </React.Fragment>
           );
         })}
       </group>
