@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import { DoubleSide, TextureLoader } from "three";
-import { Canvas, useLoader, useFrame } from "@react-three/fiber";
+import { useLoader, useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 
 //imports
-import metalrod from "../assets/metalrod.jpg";
+import metalrod from "../../assets/metalrod.jpg";
 
 const count = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -56,7 +56,7 @@ const Wire = () => {
   return (
     <mesh>
       <cylinderBufferGeometry args={cylinderDimensions} />
-      <meshStandardMaterial color={0x757678} side={DoubleSide} />
+      <meshStandardMaterial color={0x97999c} side={DoubleSide} />
     </mesh>
   );
 };

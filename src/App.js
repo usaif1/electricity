@@ -1,6 +1,6 @@
 import "./App.css";
 
-import Conductor from "./3D";
+import Conductor from "./3D/Conductor";
 
 function App() {
   return (
