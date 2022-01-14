@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { DoubleSide, TextureLoader } from "three";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
+import { Text } from "@react-three/drei";
 
 //imports
 import metalrod from "../assets/metalrod.jpg";
@@ -9,20 +10,35 @@ const count = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const Conductor = () => {
   return (
-    <group
-      // rotation={[Math.PI / 1.8, -Math.PI / 10, -Math.PI / 8]}
-      rotation={[Math.PI / 2.1, -Math.PI / 10, -Math.PI / 2.5]}
-    >
-      <Wire />
-      {count.map((number) => {
-        return (
-          <>
-            <Electron number={number} />
-            <Current number={number} />
-          </>
-        );
-      })}
-    </group>
+    <>
+      <group position={[0.2, 0, 0]} rotation={[0, -Math.PI / 12, Math.PI / 2]}>
+        <Wire />
+        {count.map((number) => {
+          return (
+            <>
+              <Electron number={number} />
+              <Current number={number} />
+            </>
+          );
+        })}
+      </group>
+      <Text
+        scale={[1.3, 1.3, 1.3]}
+        color={"white"}
+        position={[0, 0.21, -0.1]}
+        rotation={[0, -Math.PI / 12, 0]}
+      >
+        &lt;-- Current
+      </Text>
+      <Text
+        scale={[1.3, 1.3, 1.3]}
+        color={"white"}
+        position={[0, -0.2, 0.1]}
+        rotation={[0, -Math.PI / 12, 0]}
+      >
+        Electrons --&gt;
+      </Text>
+    </>
   );
 };
 
@@ -33,14 +49,14 @@ const Wire = () => {
     3,
     32,
     32,
-    true,
+    false,
   ]);
 
   const metalRodTexture = useLoader(TextureLoader, metalrod);
   return (
     <mesh>
       <cylinderBufferGeometry args={cylinderDimensions} />
-      <meshStandardMaterial color={0xb3b3b3} side={DoubleSide} />
+      <meshStandardMaterial color={0x757678} side={DoubleSide} />
     </mesh>
   );
 };
@@ -52,7 +68,9 @@ const Electron = ({ number }) => {
 
   useFrame(({ clock }) => {
     if (ref.current.position.y > -1.6) {
-      setPositionY(positionY - 0.01);
+      const y = positionY.toFixed(2);
+      const newPosition = parseFloat(y) - 0.01;
+      setPositionY(parseFloat(newPosition));
     }
 
     if (ref.current.position.y < -1.52) {
@@ -62,9 +80,12 @@ const Electron = ({ number }) => {
   });
 
   return (
-    <mesh position={[-0.05, positionY + number * 0.3, 0.1]} ref={ref}>
+    <mesh
+      position={[-0.05, parseFloat((positionY + number * 0.3).toFixed(2)), 0.1]}
+      ref={ref}
+    >
       <sphereBufferGeometry args={[0.03, 32, 16]} />
-      <meshBasicMaterial color={"blue"} />
+      <meshBasicMaterial color={0x0d56df} />
     </mesh>
   );
 };
@@ -76,7 +97,9 @@ const Current = ({ number }) => {
 
   useFrame(({ clock }) => {
     if (positionY < 1.6) {
-      setPositionY(positionY + 0.01);
+      const y = positionY.toFixed(2);
+      const newPosition = parseFloat(y) + 0.01;
+      setPositionY(parseFloat(newPosition.toFixed(2)));
     }
     if (ref.current.position.y > 1.52) {
       const y = -(1.5 + number * 0.3);
@@ -85,9 +108,12 @@ const Current = ({ number }) => {
   });
 
   return (
-    <mesh position={[0.05, positionY + number * 0.3, -0.1]} ref={ref}>
+    <mesh
+      position={[0.05, parseFloat((positionY + number * 0.3).toFixed(2)), -0.1]}
+      ref={ref}
+    >
       <sphereBufferGeometry args={[0.03, 32, 16]} />
-      <meshBasicMaterial color={"red"} />
+      <meshBasicMaterial color={"#F13232"} />
     </mesh>
   );
 };
