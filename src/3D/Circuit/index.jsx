@@ -49,12 +49,10 @@ const Index = ({ frameloop }) => {
       }}
     >
       <Canvas camera={{ position: [-1.5, 2, 3], zoom: 2.8 }}>
-        {/* <LightHelper /> */}
         <directionalLight intensity={1} position={[0, 0, -2]} />
         <directionalLight intensity={0.2} position={[-1, 0, -1]} />
         <directionalLight intensity={0.25} position={[0, 0, 1]} />
         <ambientLight intensity={0.18} />
-        {/* <OrbitControls ref={orbitRef} /> */}
         <Suspense fallback={null}>
           <Circuit
             change={change}
