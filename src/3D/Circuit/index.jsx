@@ -39,27 +39,22 @@ const Index = ({ frameloop }) => {
   return (
     <div
       style={{
-        // height: "20rem", //actual value
-        // width: "37rem",
-        // position: "absolute",
-        // right: "0",
-        // top: "25rem",
-        // border: "1px solid white",
-        height: "100vh", //dev
+        height: "20rem", //actual value
+        width: "37rem",
+        position: "absolute",
+        right: "0",
+        top: "25rem",
+        border: "1px solid white",
+        // height: "100vh", //dev
       }}
     >
       <Canvas camera={{ position: [-1.5, 2, 3], zoom: 2.8 }}>
         {/* <LightHelper /> */}
-        {/* <directionalLight intensity={0.5} position={[0, -1, 0]} />
-        <directionalLight intensity={0.1} position={[0, 0, -1]} />
-        <directionalLight
-          ref={lightRef2}
-          intensity={0.1}
-          position={[0, 0, 1]}
-        /> */}
-        {/* <hemisphereLightHelper args={[hLightRef.current, 2]} /> */}
-        <ambientLight intensity={0.2} />
-        <OrbitControls ref={orbitRef} />
+        <directionalLight intensity={1} position={[0, 0, -2]} />
+        <directionalLight intensity={0.2} position={[-1, 0, -1]} />
+        <directionalLight intensity={0.25} position={[0, 0, 1]} />
+        <ambientLight intensity={0.18} />
+        {/* <OrbitControls ref={orbitRef} /> */}
         <Suspense fallback={null}>
           <Circuit
             change={change}
