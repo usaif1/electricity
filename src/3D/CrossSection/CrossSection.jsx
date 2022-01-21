@@ -18,7 +18,7 @@ const CrossSection = ({ animate }) => {
       for (let i = 0.06; i < 2; i += 0.1)
         arr.push({ x: c.x, y: i, z: c.z, id: Math.random() + 1, index: i });
     return arr;
-  }, [count]);
+  }, []);
 
   return (
     <group position={[0, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
